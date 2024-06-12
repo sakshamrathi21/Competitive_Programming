@@ -1,40 +1,53 @@
-#include<iostream>
-#include<cmath>
+#include<bits/stdc++.h>
 using namespace std;
 
-int digit_return(long long query_value) {
-    int approx_n = 0;
-    while (query_value > approx_n*pow(10, approx_n)-(pow(10, approx_n)-1)/9) {
-        approx_n++;
-        cout<<approx_n<<endl;
+long long int power(int n) {
+    long long int result = 1;
+    while (n > 0) {
+        result *= 10;
+        n--;
     }
-    query_value -= (approx_n-1)*pow(10, approx_n-1)-(pow(10, approx_n-1)-1)/9;
-    int remainder = query_value%approx_n;
-    long long quotient = (query_value-remainder)/approx_n;
-    cout<<remainder<<endl;
-    long long real_number = pow(10, approx_n-1) + quotient - 1;
-    if (remainder == 0) {
-        return real_number % 10;
+    return result;
+}
+int find_digit ( long long int n ) {
+    int current_length = 1;
+    if ( n <= 9) return n;
+    while ( n - current_length * power(current_length - 1) * 9 > 0 ) {
+        n -= current_length * power(current_length - 1) * 9;
+        current_length ++ ;
     }
+    // cout<<"CHECK "<< current_length <<endl;
+    long long int quotient = n / current_length;
+    int remainder = n % current_length;
     
-    else {
-        for (int i = 0; i<approx_n-remainder; i++) {
-            real_number /= 10;
-            cout<<real_number<<endl;
-        }
-        return real_number%10;
+    long long int number_to_be_traversed;
+    if (remainder == 0) {
+        remainder = current_length;
+        quotient --;
     }
+    // cout << quotient << remainder << endl;
+    if (current_length > 1) {
+        number_to_be_traversed = power(current_length - 1) + quotient;
+    }
+    else {
+        number_to_be_traversed = quotient;
+    }
+    // cout<<number_to_be_traversed << endl;
+    
+    while (number_to_be_traversed >= power(remainder)) {
+        number_to_be_traversed /= 10;
+    }
+    return (number_to_be_traversed%10);
 }
 
-int main() {
-    int num_queries;
-    cin>>num_queries;
-    long long query_values[num_queries];
-    for(int i = 0; i<num_queries; i++) {
-        cin>>query_values[i];
-    }
-    for(int i = 0; i<num_queries; i++) {
-        cout<<digit_return(query_values[i])<<endl;
+int main () {
+    int num_test_cases;
+    cin >> num_test_cases;
+
+    for (int i = 0 ; i < num_test_cases; i ++ ) {
+        long long int number_to_be_tested;
+        cin >> number_to_be_tested;
+        cout << find_digit ( number_to_be_tested ) << endl; 
     }
 
 }

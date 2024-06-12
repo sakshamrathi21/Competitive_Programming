@@ -5,7 +5,10 @@ int main() {
     int n;
     cin>>n;
     bool present[n + 1];
-    present[0] = true;
+
+    for (int i = 0 ; i <=n ; i ++ ) {
+        present[i] = false;
+    }
     int x;
     int i = 0;
     while(i<n-1){
@@ -14,6 +17,7 @@ int main() {
         i++;
     }
     for(int i = 1; i<=n; i++) {
+        // cout<<" HELLO " << present[i] <<endl;
         if (!present[i]) {cout<<i; break;}
     }
 }
