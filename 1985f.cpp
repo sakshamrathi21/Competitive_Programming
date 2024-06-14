@@ -12,9 +12,9 @@ bool poss(vector<int>&a, vector<int>&c, int turns, int h) {
     for (int i = 0 ; i < a.size() ; i ++) {
         if (turns%c[i] == 0) h-= (turns/c[i])*a[i];
         else h-= (turns/c[i]+1)*a[i];
+        if (h <= 0) return true;
     }
-    if (h <= 0) return true;
-    else return false;
+    return false;
 }
 
 int binSearch(vector<int>&a, vector<int>&c, int low, int high, int h) {

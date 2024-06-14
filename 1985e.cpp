@@ -11,8 +11,8 @@
 
 using namespace std;
 
-vector<int> max_locations(int t, vector<vector<long long>>& test_cases) {
-    vector<int> results;
+vector<long long> max_locations(int t, vector<vector<long long>>& test_cases) {
+    vector<long long> results;
     
     for (int i = 0; i < t; ++i) {
         long long x = test_cases[i][0];
@@ -26,6 +26,7 @@ vector<int> max_locations(int t, vector<vector<long long>>& test_cases) {
             if (k % a == 0) {
                 long long ak = k / a;
                 for (long long b = 1; b * b <= ak; ++b) {
+                    // cout << a << " hello " << b << endl;
                     if (ak % b == 0) {
                         long long c = ak / b;
                         factors.push_back(make_tuple(a, b, c));
@@ -33,7 +34,7 @@ vector<int> max_locations(int t, vector<vector<long long>>& test_cases) {
                 }
             }
         }
-        
+        // cout << factors.size();
         for (auto& factor : factors) {
             long long a, b, c;
             tie(a, b, c) = factor;
@@ -49,11 +50,12 @@ vector<int> max_locations(int t, vector<vector<long long>>& test_cases) {
                 max_count = max(max_count, (x - b + 1) * (y - c + 1) * (z - a + 1));
             if (c <= x && a <= y && b <= z)
                 max_count = max(max_count, (x - c + 1) * (y - a + 1) * (z - b + 1));
+            
         }
-        
+        // cout << max_count << endl;
         results.push_back(max_count);
     }
-    
+    // cout << results[0];
     return results;
 }
 
@@ -66,9 +68,9 @@ int main() {
         cin >> test_cases[i][0] >> test_cases[i][1] >> test_cases[i][2] >> test_cases[i][3];
     }
     
-    vector<int> results = max_locations(t, test_cases);
+    vector<long long> results = max_locations(t, test_cases);
     
-    for (int result : results) {
+    for (long long result : results) {
         cout << result << endl;
     }
     
