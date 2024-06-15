@@ -3,7 +3,6 @@ using namespace std;
 #define int long long
 
 int gcd(int x, int y) {
-    // cout << x << y << endl;
     if (y == 0) return x;
     if (x < y) return gcd(y, x);
     if (x%y ==0) return y;

@@ -1,35 +1,16 @@
-def count_t_non_a_substrings(t, test_cases):
-    results = []
-    
-    for s in test_cases:
-        n = len(s)
-        total_t_count = 0
-        
-        i = 0
-        while i < n:
-            if s[i] != 'a':
-                start = i
-                while i < n and s[i] != 'a':
-                    i += 1
-                length = i - start
-                total_t_count += (length * (length + 1)) // 2
-            else:
-                i += 1
-                
-        results.append(total_t_count)
-    
-    return results
-
-# Reading input
-import sys
-input = sys.stdin.read
-data = input().split()
-t = int(data[0])
-test_cases = data[1:t+1]
-
-# Calculating results
-results = count_t_non_a_substrings(t, test_cases)
-
-# Printing results
-for result in results:
-    print(result)
+from collections import Counter
+from math import sqrt
+ 
+for _ in range(int(input())):
+    n=int(input())
+    a=[*map(int,input().split())]
+    d=Counter(map(str,a))
+    for i in range(int(input())):
+        x,y=map(int,input().split())
+        if x*x-4*y<0:print(0);continue
+        D=int(sqrt(x*x-4*y))
+        x1=(x+D)//2
+        x2=(x-D)//2
+        if x1+x2!=x or x1*x2!=y:print(0);continue
+        if x1!=x2:print(d[str(x1)]*d[str(x2)])
+        else:print(d[str(x1)]*(d[str(x1)]-1)//2)
