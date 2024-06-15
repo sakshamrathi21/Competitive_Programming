@@ -22,6 +22,7 @@ signed main () {
         }
         vector<vector<int>> freq(n, vector<int>(5, 0));
         vector<vector<int>> val(5, vector<int>(n, 0));
+        // int freq[n][5];
         for (int i = 0 ; i < n ; i ++ ) {
             for (int j = 0 ; j < s[i].length() ; j ++) {
                 freq[i][s[i][j]-'a'] += 1;
@@ -39,10 +40,14 @@ signed main () {
             int sum = 0;
             int el = 0;
             for (int j = 0 ; j < n ; j ++) {
+                
+                
+                // if ( i == 0) cout << val[i][j] << " " << sum << endl;
                 sum += val[i][j];
                 if (sum <= 0) break;
                 el++;
             }
+            // cout << i << " hello " << el << endl;
             ms = max(ms, el);
         }
         cout << ms << "\n";
