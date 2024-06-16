@@ -14,12 +14,23 @@ signed main () {
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0 ; i < n ; i ++) {
-            cin >> a[i];
+        int n, a, b;
+        cin >> n >> a >> b;
+
+        if (a >= b) {
+            cout << a*n << "\n";
+            continue;
         }
+        if (b-n+1 >= a) {
+            cout << ((2*b-n+1)*n)/2 << "\n";
+            continue;
+        }
+        int i1 = b-a, i2 = b+1-a;
+        
+        int l1 = ((2*b-i1+1)*i1)/2+a*(n-i1), l2 = ((2*b-i2+1)*i2)/2+a*(n-i2);
+        cout << max(l1, l2) << "\n"; 
+
+
 
     }
 }

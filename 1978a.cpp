@@ -16,10 +16,14 @@ signed main () {
     while (t--) {
         int n;
         cin >> n;
-        vector<int> a(n);
-        for (int i = 0 ; i < n ; i ++) {
+        vector<int> a(n-1);
+        int m = -1;
+        for (int i = 0 ; i < n-1 ; i ++) {
             cin >> a[i];
+            m = max(m, a[i]);
         }
-
+        int x;
+        cin >> x;
+        cout << m+x << "\n";
     }
 }
