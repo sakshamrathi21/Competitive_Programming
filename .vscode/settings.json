@@ -5,6 +5,7 @@
         "string": "cpp",
         "map": "cpp",
         "random": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "ostream": "cpp"
     }
 }
