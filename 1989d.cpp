@@ -25,40 +25,25 @@ signed main () {
     int n, m;
     cin >> n >> m;
     vector<int> a(n), b(n), c(m);
+    int mx = -1;
     for (int i = 0 ; i < n ; i ++) {
         cin >> a[i];
+        mx = max(m, a[i]);
     }
     for (int i = 0 ; i < n ; i ++) {
         cin >> b[i];
     }
-    for (int i = 0 ; i < m ; i ++) {
-        cin >> c[i];
-    }
-    vector<pair<int, int>> d(n);
-    for (int i = 0 ; i < n ; i ++){
-        d[i].first = a[i];
-        d[i].second = a[i] - b[i];
-    }
-    sort(d.begin(), d.end());
-    vector<int> diff(n);
-    int min_diff = LLONG_MAX, min_in = -1;
+    vector<int> best(mx+1, LLONG_MAX);
     for (int i = 0 ; i < n ; i ++) {
-        if (d[i].second < min_diff) {
-            min_diff = d[i].second;
-            min_in = i;
-        }
-        diff[i] = min_in;
+        best[a[i]] = min(best[a[i]], a[i]-b[i]);
+    }
+    for (int i = 1 ; i <= mx ; i ++) {
+        best[i] = min(best[i], best[i-1]);
     }
     int cnt = 0;
     for (int i = 0 ; i < m ; i ++) {
-        int val = c[i];
-        while (true) {
-            int ind = binSearch(d, val, 0, n);
-            if (ind == -1) break;
-            int mo = (val - d[diff[ind]].first)/d[diff[ind]].second+1;
-            val -= mo*d[diff[ind]].second;
-            cnt += mo;
-        }
+        int c;
+        cin >> c;
+        
     }
-    cout << cnt*2 << "\n";
 }
