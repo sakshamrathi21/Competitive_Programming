@@ -28,28 +28,36 @@ signed main () {
         // for (int i = 0 ; i < n ; i ++) {
         //     cout << ab[i].first << " hello " << ab[i].second<< endl;}
         sort(ab.begin(), ab.end(), cmp);
-        set<int> ps, ms;
+        multiset<int> ps, ms;
         for (int i = 0 ; i < n ; i ++) {
             ps.insert(ab[i].first);
             ms.insert(-ab[i].first);
         }
+        // cout << ms.size() << endl;
         int md = LLONG_MAX;
         int m = -LLONG_MAX;
         for (int i = 0 ; i < n ; i ++) {
-            // cout << ab[i].first << " hello " << ab[i].second<< endl;
-            ps.erase(ab[i].first);
-            ms.erase(-ab[i].first);
-            auto it1 = lower_bound(ps.begin(), ps.end(), ab[i].second);
-            auto it2 = lower_bound(ms.begin(), ms.end(), -ab[i].second);
+            // cout << ps.size() << " hello " << ms.size() << endl;
+            auto rt1 = ps.find(ab[i].first);
+            if (rt1 != ps.end()) ps.erase(rt1);
+            rt1 = ms.find(-ab[i].first);
+            if (rt1 != ms.end()) ms.erase(rt1);
+            // ms.erase(ms.find(ab[i].first));
+            // cout << ps.size() << " hello " << ms.size() << endl;
+            // cout << ab[i].first << " hello " << ab[i].second << " " <<  ms.size()<< endl;
+            // ps.lower_bound()
+            auto it1 = ps.lower_bound(ab[i].second);
+            auto it2 = ms.lower_bound(-ab[i].second);
             if (m != -LLONG_MAX) md = min(md, abs(ab[i].second-m));
             
             if (it1 != ps.end()) {
-                // cout << ab[i].second << " hello " << *it1 << endl;
-                if (abs(max(*it1, m)-ab[i].second) < abs(ab[i].second - m)) md = min(md, abs(max(*it1, m)-ab[i].second));
+                // cout << ab[i].second << " hello " << *it1 << " " << m  << endl;
+                if (*it1 > m) md = min(md, abs(max(*it1, m)-ab[i].second));
             }
+            // cout << " check " << md << endl;
             if (it2 != ms.end()) {
-                // cout << ab[i].second << " iihello " << *it2 << endl;
-                if (abs(max(-*it2, m)-ab[i].second) < abs(ab[i].second - m)) md = min(md, abs(max(-*it2, m)-ab[i].second));
+                // cout << ab[i].second << " iihello " << *it2 << " " << m << endl;
+                if (-*it2 > m) md = min(md, abs(max(-*it2, m)-ab[i].second));
             }
             m = max(m, ab[i].first);
             // if (na != -LLONG_MAX) md = min(md, abs(ab[i].second-na));
