@@ -6,6 +6,8 @@
         "map": "cpp",
         "random": "cpp",
         "set": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "regex": "cpp",
+        "__tree": "cpp"
     }
 }
