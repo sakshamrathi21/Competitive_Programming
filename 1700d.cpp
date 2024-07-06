@@ -14,7 +14,7 @@ int binSearch(vector<int>&y, int low, int high, int val) {
             for (int i = low; i<= high && i < y.size() ; i++){
                 if (y[i] <= val) return i;
             }
-            return -1;
+            return -2;
         }
         // cout << low << " " << high << " " << val << endl;
         int mid = (low+high)/2;
@@ -28,7 +28,7 @@ int binSearch(vector<int>&y, int low, int high, int val) {
     if (low == y.size()) return -1;
     if (y[low] <= val) return low;
     if (high < y.size() && y[high] <= val) return high;
-    return -1;
+    return -2;
 }
 
 signed main () {
@@ -69,10 +69,7 @@ signed main () {
         while (q--) {
             int l;
             cin >> l;
-            int x = binSearch(res, 0, n, l); 
-            if (x != -1) cout << x+1 << "\n";
-            else cout << "-1\n";
+            cout << binSearch(res, 0, n, l)+1 << "\n"; 
         }
-
     }
 }
