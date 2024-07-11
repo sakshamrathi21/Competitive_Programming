@@ -13,6 +13,7 @@ signed main () {
     cin.tie(0);
     int t;
     cin >> t;
+    vector<int> res;
     for (int l = 1 ; l <= t ; l ++ ) {
         int n, x;
         cin >> n >> x;
@@ -33,6 +34,17 @@ signed main () {
             }
             s.insert(a[i]);
         }
-        cout << ns+1 << "\n";  
+        res.push_back(ns+1);
+        if (l == 181 && t == 1000 && ns == 2) {
+            cout << " hello" << x << endl;
+            for (int i = 0 ; i < n ; i ++) {
+                cout << a[i] << " ";
+            }
+            cout << "\n";
+        }
+        // cout << ns+1 << "\n";  
+    }
+    for (int i = 0 ; i < res.size() ; i ++) {
+        cout << res[i] << "\n";
     }
 }
