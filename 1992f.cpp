@@ -24,25 +24,21 @@ signed main () {
         int ns = 0;
         set<int> s;
         for (int i = 0 ; i < n ; i ++) {
+            // cout << i << " hello " << ns << s.size() << endl;
             if (a[i] > x || x%a[i] != 0 || a[i] == 1) continue;
             if (s.count(x/a[i])) {
                 s.clear();
                 ns++;
             }
+            vector<int> vals;
             for (auto v : s) {
-                if (a[i]*v < x && x%(a[i]*v) == 0) s.insert(a[i]*v);
+                // cout << " check " << v << endl;
+                if (a[i]*v < x && x%(a[i]*v) == 0) vals.push_back(a[i]*v);
             }
+            for (int j = 0 ; j < vals.size() ; j ++) s.insert(vals[j]);
             s.insert(a[i]);
         }
-        res.push_back(ns+1);
-        if (l == 181 && t == 1000 && ns == 2) {
-            cout << " hello" << x << endl;
-            for (int i = 0 ; i < n ; i ++) {
-                cout << a[i] << " ";
-            }
-            cout << "\n";
-        }
-        // cout << ns+1 << "\n";  
+        res.push_back(ns+1); 
     }
     for (int i = 0 ; i < res.size() ; i ++) {
         cout << res[i] << "\n";
