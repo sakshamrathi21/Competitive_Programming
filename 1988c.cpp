@@ -29,10 +29,10 @@ signed main () {
             cout << "1\n" << n << "\n";
             continue;
         }
-        cout << __builtin_popcount(n)+1 << "\n";
+        cout << __builtin_popcountll(n)+1 << "\n";
         while (n > 0) {
             bin.push_back(n%2);
-            n/=2;
+            n /= 2;
         }
         for (int i = bin.size()-1 ; i>= 0 ; i--) {
             if (bin[i] == 0) continue;
