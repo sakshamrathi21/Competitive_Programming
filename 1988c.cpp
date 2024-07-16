@@ -34,10 +34,8 @@ signed main () {
             bin.push_back(n%2);
             n/=2;
         }
-        // int cnt = 0;
         for (int i = bin.size()-1 ; i>= 0 ; i--) {
             if (bin[i] == 0) continue;
-            // cnt++;
             bin[i] = 0;
             cout << x(bin) << " ";
             bin[i] = 1;
