@@ -1,30 +1,33 @@
-/**
- *    Author: Saksham Rathi
- *    Created: Sat Jul 20 21:26:02 IST 2024
-**/
-
-
 #include<bits/stdc++.h>
-using namespace std;
-#define int long long
 
-signed main () {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, x, y;
-        cin >> n >> x >> y;
-        for (int i = 1 ; i < y ; i ++) {
-            cout << "-1 ";
-        }
-        for (int i = y ; i <= x ; i ++) {
-            cout << "1 ";
-        }
-        for (int i = x+1 ; i <= n ; i ++) {
-            cout << "-1 ";
-        }
-        cout << "\n";
+using namespace std;
+
+int main(){
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int t;
+  cin >> t;
+  while(t>0){
+    t--;
+    int n,x,y;
+    cin >> n >> x >> y;
+    x--; y--;
+    vector<int> a(n,1);
+    int e;
+    e=-1;
+    for(int i=x+1;i<n;i++){
+      a[i]=e;
+      e*=-1;
     }
+    e=-1;
+    for(int i=y-1;i>=0;i--){
+      a[i]=e;
+      e*=-1;
+    }
+    for(int i=0;i<n;i++){
+      if(i){cout << " ";}
+      cout << a[i];
+    }cout << "\n";
+  }
+  return 0;
 }

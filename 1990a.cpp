@@ -17,16 +17,19 @@ signed main () {
         int n;
         cin >> n;
         vector<int> a(n);
-        multiset<int> s;
+        map<int, int> freq;
         for (int i = 0 ; i < n ; i ++) {
             cin >> a[i];
-            s.insert(a[i]);
+            freq[a[i]]++;
         }
-        int cnt = s.count(*s.rbegin());
-        if (cnt%2) {
-            cout << "YES\n";
+        bool found = false;
+        for (auto p : freq) {
+            if (p.second%2) {
+                found = true;
+                break;
+            }
         }
-        else cout << "NO\n";
-
+        if (!found) cout << "NO\n";
+        else cout << "YES\n";
     }
 }
