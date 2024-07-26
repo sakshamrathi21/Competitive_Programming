@@ -1,6 +1,6 @@
 /**
  *    Author: Saksham Rathi
- *    Created: Sat Jun  8 15:36:34 IST 2024
+ *    Created: Fri Jul 26 16:22:30 IST 2024
 **/
 
 
@@ -21,50 +21,48 @@ signed main () {
             cin >> a[i];
         }
         sort(a.begin(), a.end());
-        int i = 0, j = n - 1;
-        int x = 0;
-        int cnt = 0;
-        while (i < j) {
-            // cout << " hello " << i << j << cnt << endl;
-            if (x+a[i]<a[j]) {
-                // cout << cnt << " check " << x << endl;
-                x+=a[i];
-                cnt += a[i];
-                a[i] = 0;
-                i++;
-                
-                // cout << cnt << " check " << x << endl;
+        int l = 0, r = n-1, curr = 0, cnt = 0;
+        while (l < r) {
+            // cout << l << " " << r << " " << a[l] << " " << a[r] << " " << curr << endl;
+            if (curr+a[l] < a[r]) {
+                curr += a[l];
+                cnt += a[l];
+                a[l] = 0;
+                l++;
             }
-            else if (x+a[i] == a[j]) {
-                cnt += a[i];
+            else if (curr+a[l] == a[r]) {
+                cnt += a[l];
+                a[r] = 0;
+                a[l] = 0;
+                curr = 0;
+                l++;
+                r--;
                 cnt += 1;
-                a[i] = 0; a[j] = 0;
-                i++;
-                j--;
-                
             }
             else {
-                a[i] -= (a[j]-x);
                 cnt += 1;
-                cnt += a[j]-x;
-                x += a[i];
-                cnt += a[i];
-                a[i] = 0; a[j] = 0;
-                i++;
-                j--;
-                
+                cnt += (a[r]-curr);
+                a[l] -= (a[r]-curr);
+                curr = 0;
+                a[r] = 0;
+                r--;
             }
         }
-        if  (a[i] != 0) {
-            if (x == 0) {
-                cnt+= ((a[i]%2==0) ? (a[i]/2) : (a[i]/2+1));
-            }
-            else if (x<=a[i]) {
-                a[i] -= x;
+        // cout << " check " << a[l] << curr << endl;
+        if (curr >= a[l] && curr != 0) {
+            cnt += 1;
+            a[l] = 0;
+        }
+        if (a[l] != 0) {
+            if (a[l] == 1 && curr == 0) {
                 cnt++;
-                cnt+= ((a[i]%2==0) ? (a[i]/2) : (a[i]/2+1));
             }
-            else cnt+= ((a[i]%2==0) ? (a[i]/2) : (a[i]/2+1));
+            else {
+                int x = (a[l]-curr+1)/2;
+                // cout << " check "
+                cnt+=x;
+                cnt+=1;
+            }
         }
         cout << cnt << "\n";
     }
