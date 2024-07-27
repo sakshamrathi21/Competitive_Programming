@@ -32,3 +32,4 @@ signed main () {
 }" > "$file_name"
 
 open "$file_name"
+clear
