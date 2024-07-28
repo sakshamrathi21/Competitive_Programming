@@ -1,67 +1,41 @@
-#include <iostream>
-#include <vector>
-#include <stack>
+/**
+ *    Author: Saksham Rathi
+ *    Created: Sat Jul 27 23:24:10 IST 2024
+**/
 
+
+#include<bits/stdc++.h>
 using namespace std;
+#define int long long
 
-void find_maximum_cities(int n, vector<pair<int, int>> &flights) {
-    vector<vector<int>> graph(n + 1);
-    vector<bool> visited(n + 1, false);
-    vector<int> path;
-
-    // Build the graph
-    for (const auto &flight : flights) {
-        graph[flight.first].push_back(flight.second);
+string solution(int N) {
+    vector<int> binForm;
+    while (N>0) {
+        binForm.push_back(N%2);
+        N/=2;
     }
-
-    // Depth-first search
-    stack<int> dfs_stack;
-    dfs_stack.push(1);
-
-    while (!dfs_stack.empty()) {
-        int current_city = dfs_stack.top();
-        dfs_stack.pop();
-
-        if (!visited[current_city]) {
-            visited[current_city] = true;
-            path.push_back(current_city);
-
-            for (int neighbor : graph[current_city]) {
-                if (!visited[neighbor]) {
-                    dfs_stack.push(neighbor);
-                }
-            }
+    string res;
+    if (binForm.size() > 26) {
+        int cnt = 0;
+        while (binForm.size() > 26) {
+            cnt*=2;
+            cnt += 2*binForm[binForm.size()-1];
+            binForm.pop_back();
+        }
+        for (int i = 0 ; i < cnt ; i ++) {
+            res.push_back('z');
         }
     }
-
-    if (!visited[n]) {
-        cout << "IMPOSSIBLE" << endl;
-    } else {
-		int path_size = 0;
-        // cout << path.size() << endl;
-        for (int city : path) {
-			path_size ++;
-            // cout << city << " ";
-			if (city == n) break;
-        }
-		cout << path_size << endl;
-		for (int i = 0 ; i < path_size ; i ++ ) {
-			cout << path[i] << " ";
-		}
-        cout << endl;
+    
+    for (int i = binForm.size()-1; i >= 0 ; i--){
+        if (binForm[i]) res.push_back('a'+i);
     }
+    // reverse(res.begin(), res.end());
+    return res;
 }
 
-int main() {
-    int n, m;
-    cin >> n >> m;
-
-    vector<pair<int, int>> flights(m);
-    for (int i = 0; i < m; ++i) {
-        cin >> flights[i].first >> flights[i].second;
-    }
-
-    find_maximum_cities(n, flights);
-
-    return 0;
+signed main () {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout << solution(67108876);
 }
