@@ -1,61 +1,26 @@
 /**
  *    Author: Saksham Rathi
- *    Created: Sat Jun 22 17:12:46 IST 2024
+ *    Created: Sun Jul 28 14:19:51 IST 2024
 **/
 
 
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long
-
-int gcd(int x, int y) {
-    if (y == 0) return x;
-    if (x < y) return gcd(y, x);
-    if (x%y ==0) return y;
-    return gcd(x%y, y);
-}
-
-signed main () {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int t = 1;
-
-    vector<int> visited(15000001, 0);
-    visited[1] = true;
-    for (int k = 2 ; k < 15000001 ; k ++) {
-        if (visited[k]) continue;
-        // cout << k << endl;
-        for (int i = 2*k  ; i < 15000001 ; i+=k) {
-            // if (i == 4) cout << " hello" << i << k << endl;
-            visited[i] = k;
-            // if (i == 4) cout << " hello" << i << k<< visited[i]<< endl;
-        }
-    }
-    // cout << visited[9] << " hello " << endl;
-    vector<int> primes;
-    for (int p = 2 ; p < 15000001 ; p ++) if (!visited[p]) primes.push_back(p);
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        cin >> a[0];
-        int g = a[0];
-        for (int i = 1 ; i < n ; i ++) {
-            cin >> a[i];
-            g = gcd(a[i], g);
-        }
-        int mx = -1;
-        for (int i = 0 ;i < n ; i ++) {a[i]/=g; mx = max(mx, a[i]);}
-        int mc = -1;
-        for (auto p : primes) {
-            if (p > mx) break;
-            int cnt = 0;
-            for (int i = 0 ; i < n ; i ++) {
-                if (a[i]%p == 0) cnt++;
-            }
-            mc = max(mc, cnt);
-        }
-        if (mc == 0 || mc == -1) cout << -1;
-        else cout << n-mc;
-    }
+#define MN 300000
+#define MX 15000000
+int a[MN+5],u[MX+5],p[MX+5],pn,s[MX+5];
+int gcd(int x,int y){return y?gcd(y,x%y):x;}
+int main()
+{
+	int n,i,j,g,x,ans=0;
+	for(i=2;i<=MX;++i)
+	{
+		if(!u[i])u[i]=p[++pn]=i;
+		for(j=1;i*p[j]<=MX;++j){u[i*p[j]]=p[j];if(i%p[j]==0)break;}
+	}
+	scanf("%d",&n);
+	for(g=0,i=1;i<=n;++i)scanf("%d",&a[i]),g=gcd(g,a[i]);
+	for(i=1;i<=n;++i)for(j=a[i]/g;j>1;)for(++s[x=u[j]];u[j]==x;)j/=u[j];
+	for(i=1;i<=MX;++i)ans=max(ans,s[i]);
+	printf("%d",ans?n-ans:-1);
 }

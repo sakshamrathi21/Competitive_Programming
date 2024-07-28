@@ -1,42 +1,52 @@
 /**
  *    Author: Saksham Rathi
- *    Created: Sat Jun  8 12:54:17 IST 2024
+ *    Created: Sun Jul 28 14:17:51 IST 2024
 **/
 
 
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long
 
-bool cmp(pair<int, int> x, pair<int, int> y) {
-    if (x.second < y.second) return true;
-    return false;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+ 
+typedef __gnu_pbds::tree<int, __gnu_pbds::null_type, less<int>, __gnu_pbds::rb_tree_tag, __gnu_pbds::tree_order_statistics_node_update> ordered_set;
+ 
+int t, n;
+ 
+vector<pair<int, int>> arr;
+ 
+long long ans;
+ 
+ordered_set st;
+ 
+void solve(){
+    cin >> n;
+ 
+    arr.assign(n, {});
+ 
+    for(auto &p : arr) cin >> p.second >> p.first;
+ 
+    sort(arr.begin(), arr.end());
+ 
+    ans = 0;
+    st.clear();
+ 
+    for(auto p : arr){
+        ans += st.size() - st.order_of_key(p.second);
+ 
+        st.insert(p.second);
+    }
+ 
+    cout << ans << "\n";
 }
-
-signed main () {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
+ 
+int main(){
+    ios_base::sync_with_stdio(false);cin.tie(NULL);
+ 
     cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<pair<int, int>> a(n);
-        for (int i = 0 ; i < n ; i ++) {
-            cin >> a[i].first >> a[i].second;
-        }
-        multiset<int> st;
-        // set<int> st;
-        int cnt = 0;
-        sort(a.begin(), a.end(), cmp);
-        for (int i = 0 ; i < n ; i ++) {
-            auto it = st.upper_bound(a[i].first);
-            if (it != st.end()) {
-                cnt += st.size()-distance(st.begin(), it);
-            }
-            st.insert(a[i].first);
-        }
-        cout << cnt << "\n";
-
+ 
+    while(t--){
+        solve();
     }
 }
