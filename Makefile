@@ -1,11 +1,19 @@
 # Makefile
+# Define the source file and the output executable
+SRC = $(file_name)
+OUT = practice
 
-# Set a default value for OBJ_DIR if it is not provided as a command-line argument
-obj ?= practice.cpp
+# Define the compiler and the compiler flags
+CXX = g++
+CXXFLAGS = -std=c++20 -Wall
 
-all:
-	g++ -std=c++20 $(obj) -o practice
-	./practice
+# The default target to build
+all: $(OUT)
 
+# The rule to build the output executable
+$(OUT): $(SRC)
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
+
+# A rule to clean up the build files
 clean:
-	rm practice
+	rm -f $(OUT)

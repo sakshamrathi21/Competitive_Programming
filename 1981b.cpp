@@ -27,6 +27,22 @@ signed main () {
     while (t--) {
         int n, m;
         cin >> n >> m;
+        if (m == 0) {
+            cout << n << "\n";
+            continue;
+        }
         vector<int> bf = binForm(n);
+        vector<int> res(31);
+        for (int i = 0 ; i < 31 ; i ++) {
+            if ( i < bf.size() ) res[i] = bf[i];
+            if (res[i]) continue;
+            if ((1<<i) < n) {
+                if (min(n-n/(1<<i)*(1<<i), (n/(1<<i)+1)*(1<<i)-n) <= m) res[i] = 1;
+            }
+            else if ((n/(1<<i)+1)*(1<<i)-n <= m) res[i] = 1;
+        }
+        int r = 0;
+        for (int i = 0 ; i < 31 ; i ++) r += (1<<i)*res[i];
+        cout << r << "\n";
     }
 }
