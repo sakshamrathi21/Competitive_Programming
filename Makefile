@@ -12,7 +12,7 @@ all: $(OUT)
 
 # The rule to build the output executable
 $(OUT): $(SRC)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
+	@$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
 
 # A rule to clean up the build files
 clean:
