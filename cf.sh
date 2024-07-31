@@ -3,7 +3,7 @@
 file_name=$1
 
 current_time=$(date)
-file_name="${file_name}.cpp"
+# file_name="${file_name}.cpp"
 touch "$file_name"
 echo "/**
  *    Author: Saksham Rathi
