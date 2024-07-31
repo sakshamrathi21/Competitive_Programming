@@ -3,7 +3,9 @@
 file_name=$1
 
 current_time=$(date)
+
 touch "$file_name"
+
 echo "/**
  *    Author: Saksham Rathi
  *    Created: $current_time
