@@ -5,7 +5,7 @@ OUT = practice
 
 # Define the compiler and the compiler flags
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall
+CXXFLAGS = -std=c++23 -Wall
 
 # The default target to build
 all: $(OUT)
