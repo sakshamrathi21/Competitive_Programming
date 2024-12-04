@@ -14,8 +14,10 @@ echo "/**
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
+const int MOD = 1000000007;
 
 signed main () {
+    (void)MOD;
     ios::sync_with_stdio(0);
     cin.tie(0);
     
