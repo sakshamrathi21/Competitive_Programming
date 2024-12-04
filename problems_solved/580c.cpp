@@ -13,7 +13,7 @@ int num_l = 0;
 vector<bool> visited;
 
 void DFS(vector<vector<int>> &adj, vector<int> &a, int curr, int cons, int &m) {
-    // cout << " hello " << curr << " " << cons << " " << (curr != 0 && adj[curr].size() <= 1 && cons+a[curr] <= m) << endl;
+    // cout << " hello " << curr <  < " " << cons << " " << (curr != 0 && adj[curr].size() <= 1 && cons+a[curr] <= m) << endl;
     if (curr != 0 && adj[curr].size() <= 1 && cons+a[curr] <= m) {
         num_l ++;
         return;
