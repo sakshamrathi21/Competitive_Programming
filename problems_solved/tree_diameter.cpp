@@ -1,58 +1,54 @@
+/**
+ *    Author: Saksham Rathi
+ *    Created: Thu Dec  5 16:17:35 IST 2024
+**/
+
+
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define int long long
+const int MOD = 1000000007;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
 
-int n;
+vi d;
+vi visited;
 
-vector<vector<int>> adj(2e5+1);
-
-vector<bool> visited(2e5+1, false);
-
-vector<int> distance_from_root(2e5+1, 0);
-
-void DFS(int val) {
-    if (visited[val]) return;
-    // cout << " hello " << val << endl;
-    visited[val] = true;
-    
-    for (auto e : adj[val]) {
-        // cout << val << " check " << distance_from_root[val] << endl;
-        if (!visited[e])distance_from_root[e] = distance_from_root[val] + 1;
-        DFS(e);
+void DFS(vii &child, int node, int parent, int dis) {
+    if (visited[node]) return;
+    visited[node] = 1;
+    d[node] = dis;
+    for (auto c : child[node]) {
+        if (c == parent) continue;
+        DFS(child, c, node, dis + 1);
     }
 }
 
-
-int main () {
+signed main () {
+    (void)MOD;
     ios::sync_with_stdio(0);
     cin.tie(0);
-    
+    int n;
     cin >> n;
-
-    for (int i = 1 ; i < n ; i ++ ) {
+    vii child(n);
+    for (int i = 1; i < n ; i ++ ) {
         int a, b;
         cin >> a >> b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+        child[a-1].push_back(b-1);
+        child[b-1].push_back(a-1);
     }
-    DFS(1);
-    int max_distance = 0;
-    int max_index = 0;
-    for (int i = 1 ; i<= n ; i ++) {
-        if (distance_from_root[i] > max_distance) {max_index = i; max_distance = distance_from_root[i];}
+    d.assign(n, 0);
+    visited.assign(n, 0);
+    DFS(child, 0, -1, 0);
+    int mx_node = 0;
+    for (int i = 0 ; i < n ; i ++) {
+        if (d[mx_node] < d[i]) mx_node = i;
     }
-    // cout << " check " << max_distance << max_index << endl;;
-    fill(visited.begin(), visited.end(), false);
-    fill(distance_from_root.begin(), distance_from_root.end(), 0);
-    DFS(max_index);
-    max_distance = 0;
-    max_index = 0;
-    for (int i = 1 ; i<= n ; i ++) {
-        if (distance_from_root[i] > max_distance) {max_index = i; max_distance = distance_from_root[i];}
+    d.assign(n, 0);
+    visited.assign(n, 0);
+    DFS(child, mx_node, -1, 0);
+    for (int i = 0 ; i < n ; i ++) {
+        if (d[mx_node] < d[i]) mx_node = i;
     }
-
-    cout << max_distance << '\n';
-    return 0;
-
-    // memset(visited, 0, )
+    cout << d[mx_node] << "\n";
 }
