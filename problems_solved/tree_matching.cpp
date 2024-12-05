@@ -1,13 +1,6 @@
-#!/bin/bash
-
-file_name=$1
-
-current_time=$(date)
-
-touch "$file_name"
-echo "/**
+/**
  *    Author: Saksham Rathi
- *    Created: $current_time
+ *    Created: Thu Dec  5 16:17:35 IST 2024
 **/
 
 
@@ -23,6 +16,4 @@ signed main () {
     ios::sync_with_stdio(0);
     cin.tie(0);
     
-}" > "$file_name"
-
-open "$file_name"
+}

@@ -1,39 +1,40 @@
+/**
+ *    Author: Saksham Rathi
+ *    Created: Thu Dec  5 15:57:13 IST 2024
+**/
+
+
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define int long long
+const int MOD = 1000000007;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
 
-int n;
+map<int, int> ns;
 
-vector<vector<int>> subordinates;
-
-map<int, int> num_subordinates;
-
-int find_num_subordinates(int x) {
-    // cout << " hello " << x << endl;
-    if (num_subordinates.find(x-1) != num_subordinates.end()) return num_subordinates[x-1];
-    int count = 0;
-    for (int i = 0 ; i < subordinates[x-1].size() ; i ++ ) {
-        count += (1 + find_num_subordinates(subordinates[x-1][i] + 1));
-    }
-    return (num_subordinates[x-1] = count);
+int DFS(vii &child, int node) {
+    if (ns.find(node) != ns.end()) return ns[node];
+    int cnt = 0;
+    for (auto c : child[node]) cnt += DFS(child, c);
+    ns[node] = cnt;
+    return cnt + 1;
 }
 
-int main () {
+signed main () {
+    (void)MOD;
     ios::sync_with_stdio(0);
     cin.tie(0);
+    int n;
     cin >> n;
-    int arr[n-1];
-    for (int i = 0; i < n ; i ++ ) {
-        vector<int> push_ed;
-        subordinates.push_back(push_ed);
+    vii child(n);
+    for (int i = 1 ; i < n ; i ++ ) {
+        int x;
+        cin >> x;
+        x--;
+        if (x == i) continue;
+        child[x].push_back(i);
     }
-    for (int i = 0 ; i < n - 1 ; i ++ ) {
-        cin >> arr[i];
-        subordinates[arr[i]-1].push_back(i + 1);
-    }
-    // cout << subordinates[0][1] << endl;
-    // cout << find_num_subordinates(1);
-    for (int i = 1 ; i <= n ; i ++ ) {
-        cout << find_num_subordinates(i) << " ";
-    }
+    DFS(child, 0);
+    for (auto p : ns) cout << p.second << " ";
 }

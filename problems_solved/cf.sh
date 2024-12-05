@@ -16,6 +16,8 @@ echo "/**
 using namespace std;
 #define int long long
 const int MOD = 1000000007;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
 
 signed main () {
     (void)MOD;
