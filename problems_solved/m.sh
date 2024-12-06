@@ -20,4 +20,3 @@ else
 fi
 
 ./practice
-rm -f practice
