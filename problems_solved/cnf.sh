@@ -5,6 +5,7 @@ file_name=$1
 current_time=$(date)
 
 touch "$file_name"
+rm try
 echo > try
 echo "/**
  *    Author: Saksham Rathi

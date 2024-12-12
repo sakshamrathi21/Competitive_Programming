@@ -1,15 +1,6 @@
-#!/bin/bash
-
-file_name=$1
-
-current_time=$(date)
-
-touch "$file_name"
-rm practice
-echo > try
-echo "/**
+/**
  *    Author: Saksham Rathi
- *    Created: $current_time
+ *    Created: Thu Dec 12 19:19:12 IST 2024
 **/
 
 
@@ -35,7 +26,4 @@ signed main () {
         }
 
     }
-}" > "$file_name"
-
-open "$file_name"
-clear
+}
