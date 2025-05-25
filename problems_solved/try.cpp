@@ -1,9 +1,3 @@
-/**
- *    Author: Saksham Rathi
- *    Created: Sun May 25 08:55:55 BST 2025
-**/
-
-
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
