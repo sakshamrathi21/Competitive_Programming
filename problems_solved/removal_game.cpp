@@ -1,40 +1,35 @@
+/**
+ *    Author: Saksham Rathi
+ *    Created: Wed Jul 16 20:35:04 IST 2025
+**/
+
+
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define int long long
+const int MOD = 1000000007;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
 
-int main () {
+signed main () {
+    (void)MOD;
     ios::sync_with_stdio(0);
     cin.tie(0);
-
     int n;
     cin >> n;
-    ll arr[n];
-    for (int i = 0 ; i < n ; i ++ ) {
-        cin >> arr[i];
-    }
-
-    ll dp[n][n];
-
-    for (int i = 0 ; i < n ; i ++ ) {
-        for (int j = 0 ; j < n ; j ++ ) {
-            dp[i][j] = 0;
-        }
-    }
-
-    ll sum = 0;
-
+    vector<int> a(n);
     for (int i = 0 ; i < n ; i ++) {
-        sum += arr[i];
+        cin >> a[i];
     }
-
-    for (int i = n-1 ; i >= 0 ; i -- ) {
-        for (int j = i ; j < n ; j ++ ) {
-            if (i == j) dp[i][j] = arr[i];
-            else {
-                dp[i][j] = max(arr[i] - dp[i+1][j], arr[j] - dp[i][j-1]);
-            }
+    vii dp(n, vector<int>(n));
+    for (int i = 0 ; i < n ; i ++) dp[i][i] = a[i];
+    vector<int> psum(n+1, 0);
+    for (int i = 0 ; i < n ; i ++) psum[i+1] = psum[i] + a[i];
+    for (int l = 1 ; l < n ; l ++ ) {
+        for (int i = 0 ; i + l < n ; i ++) {
+            // cout << psum[i+l-1]-psum[i-1] << endl;
+            dp[i][i+l] = max(a[i] - dp[i+1][i+l] + psum[i+l+1]-psum[i+1], a[i+l] - dp[i][i+l-1] + psum[i+l]-psum[i]);
         }
     }
-
-    cout << (sum + dp[0][n-1]) / 2 << '\n';
+    cout << dp[0][n-1] << "\n";
 }
