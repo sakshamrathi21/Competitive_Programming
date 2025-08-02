@@ -1,37 +1,28 @@
-#include<iostream>
+/**
+ *    Author: Saksham Rathi
+ *    Created: Sat Aug  2 16:41:27 IST 2025
+**/
+
+
+#include<bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define int long long
+const int MOD = 1000000007;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
 
-ll pow(ll x, int n) {
-    if (n == 0) return 1;
-    ll result = pow(x, n/2);
-    result *= result;
-    if (n%2 == 1) result *= x;
-    return result;
-}
-
-int highest_power_of_two(ll x) {
-    if (x == 0 ) return 0;
-    int count = 0;
-    while (x) {
-        x/=2;
-        count ++;
-    }
-    return count - 1;
-}
-
-ll bits_count(ll n) {
-    // cout << n << endl;
-    if (n <= 0) return 0;
-    int power = highest_power_of_two(n + 1);
-    return (power*pow(2, power - 1) + (n- pow(2, power) + 1) + bits_count(n- pow(2, power)));
-}
-
-int main () {
+signed main () {
+    (void)MOD;
     ios::sync_with_stdio(0);
     cin.tie(0);
-    ll n;
+    int n;
     cin >> n;
-    // cout << highest_power_of_two(n);
-    cout << bits_count(n) << endl;
+    int count = 0;
+    for (int i = 2 ; i <= 2*n ; i*=2) {
+        count += (n/i)*i/2;
+        int rem = n - (n/i)*i;
+        count += rem >= i/2 ? rem - i/2 + 1 : 0;
+        // cout << i << " " << count << "\n";
+    }
+    cout << count << "\n";
 }
