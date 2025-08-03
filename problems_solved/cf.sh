@@ -18,8 +18,7 @@ using namespace std;
 #define int long long
 const int MOD = 1000000007;
 
-void solve()
-{
+void solve() {
     int n;
     cin >> n;
     vector<int> a(n);

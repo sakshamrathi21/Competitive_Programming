@@ -17,8 +17,10 @@ echo "/**
 using namespace std;
 #define int long long
 const int MOD = 1000000007;
-typedef vector<int> vi;
-typedef vector<vector<int>> vii;
+
+void solve() {
+
+}
 
 signed main () {
     (void)MOD;
@@ -28,3 +30,4 @@ signed main () {
 }" > "$file_name"
 
 open "$file_name"
+clear
