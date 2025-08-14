@@ -4,7 +4,7 @@ SRC = $(file_name)
 OUT = practice
 
 # Define the compiler and the compiler flags
-CXX = g++
+CXX = g++-15
 CXXFLAGS = -std=c++23 -Wall -Wextra
 
 # The default target to build
